@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма задачи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #f0f0f0; /* Серый фон для всех полей */
+        }
+        button {
+            background-color: #f0f0f0; /* Серый фон для кнопки "Отправить" */
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Кнопка занимает всю ширину */
+        }
+        button:hover {
+            background-color: #e0e0e0; /* При наведении */
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Форма задачи</h2>
+    <form id="taskForm">
+        <!-- Поле "От кого..." -->
+        <label for="from">От кого...</label>
+        <select id="from" name="from" placeholder="От кого...">
+            <option value="">От кого...</option>
+            <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
+            <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
+            <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
+            <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
+            <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
+            <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
+            <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
+            <option value="Администрация - Мицкевич Михаил">Администрация - Мицкевич Михаил</option>
+            <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
+            <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
+            <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
+        </select>
+
+        <!-- Поле "Срок выполнения" -->
+        <label for="due_date">Срок выполнения</label>
+        <input type="date" id="due_date" name="due_date">
+
+        <!-- Поле "Приоритет" -->
+        <label for="priority">Приоритет...</label>
+        <select id="priority" name="priority">
+            <option value="">Приоритет...</option>
+            <option value="Высокий">Высокий</option>
+            <option value="Средний">Средний</option>
+            <option value="Низкий">Низкий</option>
+        </select>
+
+        <!-- Поле "Тип задачи" -->
+        <label for="task_type">Тип задачи...</label>
+        <select id="task_type" name="task_type">
+            <option value="">Тип задачи...</option>
+            <option value="Задача">Задача</option>
+            <option value="Планёрка">Планёрка</option>
+            <option value="Совещание">Совещание</option>
+            <option value="Кроссфункциональное сотрудничество">Кроссфункциональное сотрудничество</option>
+        </select>
+
+        <!-- Поле "Описание" -->
+        <label for="description">Описание</label>
+        <textarea id="description" name="description" rows="4" placeholder="Описание"></textarea>
+
+        <!-- Поле "Решение" -->
+        <label for="solution">Решение</label>
+        <textarea id="solution" name="solution" rows="4" placeholder="Решение"></textarea>
+
+        <!-- Поле "Кому" -->
+        <label for="to">Кому</label>
+        <select id="to" name="to">
+            <option value="">Кому</option>
+            <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
+            <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
+            <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
+            <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
+            <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
+            <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
+            <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
+            <option value="Администрация - Мицкевич Михаил">Администрация - Мицкевич Михаил</option>
+            <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
+            <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
+            <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
+        </select>
+
+        <!-- Кнопка отправки -->
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            // Получаем данные из формы
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // Отправляем данные на webhook через POST-запрос
+            fetch('https://make.com/webhook-url', { // Замените на URL из Make.com
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert('Данные успешно отправлены!');
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке данных.');
+            });
+        });
+    </script>
+</body>
+</html>
