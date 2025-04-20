@@ -35,6 +35,12 @@
         button:hover {
             background-color: #e0e0e0; /* При наведении */
         }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +113,7 @@
 
         <!-- Кнопка отправки -->
         <button type="submit">Отправить</button>
+        <div id="errorMessage" class="error" style="display: none;">Все поля должны быть заполнены!</div>
     </form>
 
     <script>
@@ -117,8 +124,26 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
 
+            // Проверяем, что все поля заполнены
+            let allFieldsFilled = true;
+            for (const key in data) {
+                if (!data[key]) {
+                    allFieldsFilled = false;
+                    break;
+                }
+            }
+
+            // Если не все поля заполнены, показываем ошибку
+            const errorMessage = document.getElementById('errorMessage');
+            if (!allFieldsFilled) {
+                errorMessage.style.display = 'block';
+                return;
+            } else {
+                errorMessage.style.display = 'none';
+            }
+
             // Отправляем данные на webhook через POST-запрос
-            fetch('https://make.com/webhook-url', { // Замените на URL из Make.com
+            fetch('https://hook.eu2.make.com/13a31kvxp88w2do61e9zjxdxftl4j1uf', { // Ваш вебхук
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
