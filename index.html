@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f9f9f9;
+            overflow-y: auto;
         }
         label {
             display: block;
@@ -41,90 +42,261 @@
             margin-top: -10px;
             margin-bottom: 10px;
         }
+        .form-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding-bottom: 20px; /* Добавляем отступ снизу для iOS */
+        }
+        .raci-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .raci-table th, .raci-table td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+        .raci-table th {
+            background-color: #f0f0f0;
+        }
+        .raci-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .raci-dropdown select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #f0f0f0; /* Серый фон для всех полей */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#000" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px 10px;
+        }
+        .raci-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1;
+            width: 100%; /* Ширина выпадающего меню равна ширине формы */
+            max-height: 200px; /* Ограничение высоты выпадающего меню */
+            overflow-y: auto;
+        }
+        .raci-dropdown-content table {
+            width: 100%;
+        }
+        .raci-dropdown-content table tr:hover {
+            background-color: #f0f0f0;
+        }
+        .raci-dropdown.active .raci-dropdown-content {
+            display: block;
+        }
+        .placeholder-bold {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Форма задачи</h2>
-    <form id="taskForm">
-        <!-- Поле "От кого..." -->
-        <label for="from">От кого...</label>
-        <select id="from" name="from" placeholder="От кого...">
-            <option value="">От кого...</option>
-            <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
-            <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
-            <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
-            <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
-            <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
-            <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
-            <option value="Отдел продаж - Мицкевич Михаил">Отдел продаж - Мицкевич Михаил</option>
-            <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
-            <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
-            <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
-            <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
-            <option value="Проект одежда - Семёнов Сергей">Проект одежда - Семёнов Сергей</option>
-            <option value="Проект одежда - Фортуна Таня">Проект одежда - Фортуна Таня</option>
-            <option value="Проект одежда - Сикорский Владимир">Проект одежда - Сикорский Владимир</option>
-            <option value="Проект одежда - Даша">Проект одежда - Даша</option>
-            <option value="Проект разработки - Стас Метельский">Проект разработки - Стас Метельский</option>
-        </select>
+    <div class="form-container">
+        <h2 style="text-align: center;">Форма задачи</h2>
+        <form id="taskForm">
+            <!-- Поле "От кого..." -->
+            <select id="from" name="from" required>
+                <option value="">От кого...</option>
+                <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
+                <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
+                <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
+                <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
+                <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
+                <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
+                <option value="Отдел продаж - Мицкевич Михаил">Отдел продаж - Мицкевич Михаил</option>
+                <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
+                <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
+                <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
+                <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
+                <option value="Проект одежда - Семёнов Сергей">Проект одежда - Семёнов Сергей</option>
+                <option value="Проект одежда - Фортуна Таня">Проект одежда - Фортуна Таня</option>
+                <option value="Проект одежда - Сикорский Владимир">Проект одежда - Сикорский Владимир</option>
+                <option value="Проект одежда - Даша">Проект одежда - Даша</option>
+                <option value="Проект разработки - Стас Метельский">Проект разработки - Стас Метельский</option>
+            </select>
 
-        <!-- Поле "Срок выполнения" -->
-        <label for="due_date">Срок выполнения</label>
-        <input type="date" id="due_date" name="due_date">
+            <!-- Поле "Срок выполнения" -->
+            <input type="date" id="due_date" name="due_date" placeholder="Срок выполнения" required>
 
-        <!-- Поле "Приоритет" -->
-        <label for="priority">Приоритет...</label>
-        <select id="priority" name="priority">
-            <option value="">Приоритет...</option>
-            <option value="Высокий">Высокий</option>
-            <option value="Средний">Средний</option>
-            <option value="Низкий">Низкий</option>
-        </select>
+            <!-- Поле "Приоритет" -->
+            <select id="priority" name="priority" required>
+                <option value="">Приоритет...</option>
+                <option value="Высокий">Высокий</option>
+                <option value="Средний">Средний</option>
+                <option value="Низкий">Низкий</option>
+            </select>
 
-        <!-- Поле "Тип задачи" -->
-        <label for="task_type">Тип задачи...</label>
-        <select id="task_type" name="task_type">
-            <option value="">Тип задачи...</option>
-            <option value="Задача">Задача</option>
-            <option value="Планёрка">Планёрка</option>
-            <option value="Совещание">Совещание</option>
-            <option value="Кроссфункциональное сотрудничество">Кроссфункциональное сотрудничество</option>
-        </select>
+            <!-- Поле "Тип задачи" -->
+            <select id="task_type" name="task_type" required>
+                <option value="">Тип задачи...</option>
+                <option value="Задача">Задача</option>
+                <option value="Планёрка">Планёрка</option>
+                <option value="Совещание">Совещание</option>
+                <option value="Кроссфункциональное сотрудничество">Кроссфункциональное сотрудничество</option>
+            </select>
 
-        <!-- Поле "Описание" -->
-        <label for="description">Описание</label>
-        <textarea id="description" name="description" rows="4" placeholder="Описание"></textarea>
+            <!-- Поле "Описание" -->
+            <textarea id="description" name="description" rows="4" placeholder="Описание" required></textarea>
 
-        <!-- Поле "Решение" -->
-        <label for="solution">Решение</label>
-        <textarea id="solution" name="solution" rows="4" placeholder="Решение"></textarea>
+            <!-- Поле "Решение" -->
+            <textarea id="solution" name="solution" rows="4" placeholder="Решение" required></textarea>
 
-        <!-- Поле "Кому" -->
-        <label for="to">Кому</label>
-        <select id="to" name="to">
-            <option value="">Кому</option>
-            <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
-            <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
-            <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
-            <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
-            <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
-            <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
-            <option value="Отдел продаж - Мицкевич Михаил">Отдел продаж - Мицкевич Михаил</option>
-            <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
-            <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
-            <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
-            <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
-            <option value="Проект одежда - Семёнов Сергей">Проект одежда - Семёнов Сергей</option>
-            <option value="Проект одежда - Фортуна Таня">Проект одежда - Фортуна Таня</option>
-            <option value="Проект одежда - Сикорский Владимир">Проект одежда - Сикорский Владимир</option>
-            <option value="Проект одежда - Даша">Проект одежда - Даша</option>
-            <option value="Проект разработки - Стас Метельский">Проект разработки - Стас Метельский</option>
-        </select>
+            <!-- Поле "Кому" -->
+            <select id="to" name="to" required>
+                <option value="">Кому</option>
+                <option value="Отдел обучения - Маклак Аня">Отдел обучения - Маклак Аня</option>
+                <option value="Отдел Бронирования - Кудра Настя">Отдел Бронирования - Кудра Настя</option>
+                <option value="Технический отдел - Заяц Валера">Технический отдел - Заяц Валера</option>
+                <option value="Бухгалтерия - Сабодахо Сергей">Бухгалтерия - Сабодахо Сергей</option>
+                <option value="Отдел маркетинга - Сенюк Аня">Отдел маркетинга - Сенюк Аня</option>
+                <option value="Отдел маркетинга - Полина">Отдел маркетинга - Полина</option>
+                <option value="Отдел продаж - Мицкевич Михаил">Отдел продаж - Мицкевич Михаил</option>
+                <option value="Администрация - Ланчакова Екатерина">Администрация - Ланчакова Екатерина</option>
+                <option value="Администрация - Сикорский Владимир">Администрация - Сикорский Владимир</option>
+                <option value="Администрация - Фортуна Таня">Администрация - Фортуна Таня</option>
+                <option value="Администрация - Семенов Сергей">Администрация - Семенов Сергей</option>
+                <option value="Проект одежда - Семёнов Сергей">Проект одежда - Семёнов Сергей</option>
+                <option value="Проект одежда - Фортуна Таня">Проект одежда - Фортуна Таня</option>
+                <option value="Проект одежда - Сикорский Владимир">Проект одежда - Сикорский Владимир</option>
+                <option value="Проект одежда - Даша">Проект одежда - Даша</option>
+                <option value="Проект разработки - Стас Метельский">Проект разработки - Стас Метельский</option>
+            </select>
 
-        <!-- Кнопка отправки -->
-        <button type="submit">Отправить</button>
-        <div id="errorMessage" class="error" style="display: none;">Все поля должны быть заполнены!</div>
-    </form>
+            <!-- Поле "RACI" -->
+            <div class="raci-dropdown">
+                <select id="raciSelect" name="raciSelect" required>
+                    <option value="">RACI</option>
+                </select>
+                <div class="raci-dropdown-content">
+                    <table class="raci-table">
+                        <thead>
+                            <tr>
+                                <th>Имя</th>
+                                <th>R</th>
+                                <th>A</th>
+                                <th>C</th>
+                                <th>I</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Семёнов Сергей</td>
+                                <td><input type="checkbox" name="raci_Семёнов_Сергей_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Семёнов_Сергей_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Семёнов_Сергей_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Семёнов_Сергей_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Фортуна Таня</td>
+                                <td><input type="checkbox" name="raci_Фортуна_Таня_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Фортуна_Таня_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Фортуна_Таня_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Фортуна_Таня_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Мицкевич Михаил</td>
+                                <td><input type="checkbox" name="raci_Мицкевич_Михаил_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Мицкевич_Михаил_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Мицкевич_Михаил_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Мицкевич_Михаил_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Сабодахо Сергей</td>
+                                <td><input type="checkbox" name="raci_Сабодахо_Сергей_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Сабодахо_Сергей_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Сабодахо_Сергей_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Сабодахо_Сергей_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Маклак Аня</td>
+                                <td><input type="checkbox" name="raci_Маклак_Аня_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Маклак_Аня_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Маклак_Аня_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Маклак_Аня_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Потапович Александрина</td>
+                                <td><input type="checkbox" name="raci_Потапович_Александрина_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Потапович_Александрина_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Потапович_Александрина_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Потапович_Александрина_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Кудра Настя</td>
+                                <td><input type="checkbox" name="raci_Кудра_Настя_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Кудра_Настя_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Кудра_Настя_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Кудра_Настя_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Заяц Валера</td>
+                                <td><input type="checkbox" name="raci_Заяц_Валера_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Заяц_Валера_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Заяц_Валера_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Заяц_Валера_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Ланчакова Екатерина</td>
+                                <td><input type="checkbox" name="raci_Ланчакова_Екатерина_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Ланчакова_Екатерина_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Ланчакова_Екатерина_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Ланчакова_Екатерина_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Сикорский Владимир</td>
+                                <td><input type="checkbox" name="raci_Сикорский_Владимир_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Сикорский_Владимир_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Сикорский_Владимир_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Сикорский_Владимир_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Сенюк Аня</td>
+                                <td><input type="checkbox" name="raci_Сенюк_Аня_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Сенюк_Аня_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Сенюк_Аня_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Сенюк_Аня_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Полина</td>
+                                <td><input type="checkbox" name="raci_Полина_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Полина_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Полина_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Полина_I" value="I"></td>
+                            </tr>
+                            <tr>
+                                <td>Даша</td>
+                                <td><input type="checkbox" name="raci_Даша_R" value="R"></td>
+                                <td><input type="checkbox" name="raci_Даша_A" value="A"></td>
+                                <td><input type="checkbox" name="raci_Даша_C" value="C"></td>
+                                <td><input type="checkbox" name="raci_Даша_I" value="I"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <button type="submit">Отправить</button>
+            <div id="errorMessage" class="error" style="display: none;">Все поля должны быть заполнены!</div>
+        </form>
+    </div>
 
     <script>
         document.getElementById('taskForm').addEventListener('submit', function(event) {
@@ -137,20 +309,52 @@
             // Проверяем, что все поля заполнены
             let allFieldsFilled = true;
             for (const key in data) {
-                if (!data[key]) {
+                if (!data[key] && key !== 'due_date') {
                     allFieldsFilled = false;
                     break;
                 }
             }
 
-            // Если не все поля заполнены, показываем ошибку
+            // Проверяем, что хотя бы один чекбокс RACI выбран
+            const checkboxes = document.querySelectorAll('input[name^="raci_"]');
+            let raciSelected = false;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    raciSelected = true;
+                }
+            });
+
+            // Если хотя бы одно поле не заполнено или ни один чекбокс RACI не выбран, показываем ошибку
             const errorMessage = document.getElementById('errorMessage');
-            if (!allFieldsFilled) {
+            if (!allFieldsFilled || !raciSelected) {
                 errorMessage.style.display = 'block';
+                if (!allFieldsFilled) {
+                    errorMessage.textContent = 'Все поля должны быть заполнены!';
+                } else {
+                    errorMessage.textContent = 'Необходимо выбрать хотя бы одну роль для RACI!';
+                }
                 return;
             } else {
                 errorMessage.style.display = 'none';
             }
+
+            // Обрабатываем RACI данные
+            const raciData = {};
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const [name, role] = checkbox.name.split('_').slice(1, -1).join(' ').split(' ');
+                    if (!raciData[name]) {
+                        raciData[name] = [];
+                    }
+                    raciData[name].push(role);
+                }
+            });
+
+            // Преобразуем RACI данные в строку
+            const raciString = Object.entries(raciData).map(([name, roles]) => `${name} (${roles.join(', ')})`).join(', ');
+
+            // Добавляем RACI строку в данные формы
+            data.raci = raciString;
 
             // Отправляем данные на webhook через POST-запрос
             fetch('https://hook.eu2.make.com/13a31kvxp88w2do61e9zjxdxftl4j1uf', { // Ваш вебхук
@@ -163,7 +367,43 @@
             .then(response => response.json())
             .then(result => {
                 alert('Данные успешно отправлены!');
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке данных:', error);
+                alert('Произошла ошибка при отправке данных. Пожалуйста, попробуйте снова.');
             });
+        });
+
+        // Функция для прокрутки к активному элементу при фокусировке
+        function scrollToActiveElement() {
+            const activeElement = document.activeElement;
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.tagName === 'SELECT') {
+                setTimeout(() => {
+                    activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        // Добавляем обработчики событий для фокусировки и потери фокуса
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', scrollToActiveElement);
+        });
+
+        // Функция для управления выпадающим списком RACI
+        document.getElementById('raciSelect').addEventListener('click', function(event) {
+            event.stopPropagation();
+            const dropdown = this.parentElement;
+            dropdown.classList.toggle('active');
+        });
+
+        // Закрытие выпадающего списка RACI при клике вне области
+        document.addEventListener('click', function(event) {
+            const raciDropdown = document.querySelector('.raci-dropdown');
+            const isClickInsideRACI = raciDropdown.contains(event.target);
+
+            if (!isClickInsideRACI && raciDropdown.classList.contains('active')) {
+                raciDropdown.classList.remove('active');
+            }
         });
     </script>
 </body>
