@@ -362,7 +362,7 @@ fetch('https://hook.eu2.make.com/13a31kvxp88w2do61e9zjxdxftl4j1uf', { // Ваш 
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return response.text(); // Используем response.text() для получения текстового ответа
+    return response.text(); // Используем response.text() для получения текстового ответа.
 })
 .then(result => {
     // Проверяем, если результат содержит "Accepted"
